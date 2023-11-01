@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../counter/Counter.module.css";
-import { addNumberRequest, getDataRequest, minusNumberRequest } from "./redux/action";
+import { addNumberRequest, getData, minusNumberRequest } from "./redux/action";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -16,8 +16,6 @@ class Count extends React.Component {
 	render = () => {
 
 		const { addNumber, minusNumber, counter: { count }, apiData } = this.props;
-
-		console.log(apiData)
 
 		return (
 			<div>
@@ -111,7 +109,7 @@ const dispatchToProps = dispatch => {
 			dispatch(minusNumberRequest());
 		},
 		getData: () => {
-			dispatch(getDataRequest());
+			dispatch(getData());
 		}
 	}
 }

@@ -16,7 +16,7 @@ export const reducer = (state = initialState, action) => {
 			}
 
 		// GET DATA
-		case actionType.GET_DATA_ACTION_LOADING:
+		case actionType.GET_DATA_REQUEST:
 			return {
 				...state,
 				apiData: {
@@ -24,12 +24,20 @@ export const reducer = (state = initialState, action) => {
 					loading: true,
 				}
 			}
-		case actionType.GET_DATA_ACTION:
+		case actionType.GET_DATA_SUCCESS:
 			return {
 				...state,
 				apiData: {
 					...state.apiData,
 					data: action.payload,
+					loading: false,
+				}
+			}
+		case actionType.GET_DATA_ERROR:
+			return {
+				...state,
+				apiData: {
+					...state.apiData,
 					loading: false,
 				}
 			}

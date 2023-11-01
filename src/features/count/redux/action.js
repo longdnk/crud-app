@@ -1,5 +1,6 @@
 import * as constants from './constants';
 import { api } from "../../../api";
+import { toast } from "sonner";
 
 export const addNumberRequest = () => {
 	return dispatch => {
@@ -25,25 +26,41 @@ const minusNumberRequestAction = () => {
 	}
 }
 
-export const getDataRequest = () => {
+export const getData = () => {
 	return dispatch => {
-		dispatch(getDataActionLoading());
-		api.get('account').then(res => {
-			dispatch(getDataAction(res));
-		}).catch(e => {
-			console.log(e.message);
-		})
+		dispatch(getDataRequest());
+		setTimeout(() => {
+			return api.get('account').then(res => {
+				dispatch(getDataSuccess(res));
+				pushMessage('success', 'Get data success');
+			}).catch(e => {
+				dispatch(getDataError());
+				pushMessage('error', e.message ?? e.response.data.message);
+			})
+		}, 1000)
 	}
 }
-const getDataAction = res => {
+
+const getDataRequest = () => {
 	return {
-		type: constants.GET_DATA_ACTION,
+		type: constants.GET_DATA_REQUEST,
+		payload: null,
+	}
+}
+const getDataSuccess = res => {
+	return {
+		type: constants.GET_DATA_SUCCESS,
 		payload: res.data,
 	}
 }
-const getDataActionLoading = () => {
+
+const getDataError = () => {
 	return {
-		type: constants.GET_DATA_ACTION_LOADING,
+		type: constants.GET_DATA_ERROR,
 		payload: null,
 	}
+}
+
+export const pushMessage = (type, message) => {
+	return toast[type](message);
 }
