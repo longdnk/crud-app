@@ -14,7 +14,6 @@ root.render(
 	<>
 		<Provider store={store}>
 			<App/>
-			<Toaster richColors position={'top-right'} closeButton/>
 		</Provider>
 	</>
 );

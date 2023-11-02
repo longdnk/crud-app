@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Count from "./features/count/count";
+import User from "./features/user/User";
 import { Toaster } from "sonner";
 
 export default class App extends React.Component {
@@ -10,7 +10,7 @@ export default class App extends React.Component {
 			<div className="App">
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo"/>
-					<Count/>
+					<User/>
 					<p>
 						Edit <code>src/App.js</code> and save to reload.
 					</p>
@@ -53,6 +53,7 @@ export default class App extends React.Component {
 				  </a>
 				</span>
 				</header>
+				<Toaster richColors position={'top-right'} closeButton/>
 			</div>
 		);
 	}
